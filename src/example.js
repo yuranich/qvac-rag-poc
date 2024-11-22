@@ -3,32 +3,13 @@ const LanceDBAdapter = require('./LanceDBAdapter')
 const RetrievalManager = require('./RetrievalManager')
 const VectorDBManager = require('./VectorDBManager')
 const RAGAgent = require('./RagAgent')
+const func = require('./embeddings/llama31')
 
 ;(async () => {
-  const { pipeline } = await import('@xenova/transformers')
-
-  let embeddingPipeline = null
-
-  async function initializeEmbeddingFunction () {
-    embeddingPipeline = await pipeline(
-      'feature-extraction',
-      'Xenova/all-MiniLM-L6-v2'
-    )
-  }
-
-  async function generateEmbedding (text) {
-    const result = await embeddingPipeline(text, {
-      pooling: 'mean',
-      normalize: true
-    })
-    return Array.from(result.data)
-  }
-
-  await initializeEmbeddingFunction()
 
   const inferenceModel = new InferenceModel('llama3.1')
 
-  const lanceDBBackend = new LanceDBAdapter('/tmp/lancedb/', generateEmbedding)
+  const lanceDBBackend = new LanceDBAdapter('/tmp/lancedb/', func)
   const vectorDBManager = new VectorDBManager(lanceDBBackend)
   const retrievalManager = new RetrievalManager(vectorDBManager)
 
