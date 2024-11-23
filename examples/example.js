@@ -1,9 +1,9 @@
-const InferenceModel = require('./InferenceModel')
-const LanceDBAdapter = require('./LanceDBAdapter')
-const RetrievalManager = require('./RetrievalManager')
-const VectorDBManager = require('./VectorDBManager')
-const RAGAgent = require('./RagAgent')
-const func = require('./embeddings/llama31')
+const InferenceModel = require('../src/InferenceModel')
+const LanceDBAdapter = require('../src/LanceDBAdapter')
+const RetrievalManager = require('../src/RetrievalManager')
+const VectorDBManager = require('../src/VectorDBManager')
+const RAGAgent = require('../src/RagAgent')
+const func = require('../src/embeddings/llama31')
 
 ;(async () => {
 
