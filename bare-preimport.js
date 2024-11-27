@@ -1,7 +1,7 @@
 const { TextEncoder, TextDecoder } = require('text-encoding')
 global.TextEncoder = TextEncoder
 global.TextDecoder = TextDecoder
-global.process = require('bare-process')
+require('bare-process/global')
 const fetch = require('bare-fetch')
 global.fetch = fetch
 global.Headers = fetch.Headers

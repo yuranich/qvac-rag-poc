@@ -1,4 +1,4 @@
-const InferenceModel = require('../src/InferenceModel')
+const InferenceModel = require('../src/inference/InferenceModel')
 const LanceDBAdapter = require('../src/LanceDBAdapter')
 const RetrievalManager = require('../src/RetrievalManager')
 const VectorDBManager = require('../src/VectorDBManager')

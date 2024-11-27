@@ -1,23 +1,32 @@
 require('../bare-preimport')
-const InferenceModel = require('../src/InferenceModel')
+// const InferenceModel = require('../src/InferenceModel')
+const InferenceModel = require('../src/inference/QvacLlamaModel')
+console.log('inference model after import')
 const LanceDBAdapter = require('../src/LanceDBAdapter')
 const RetrievalManager = require('../src/RetrievalManager')
+console.log('inference model before creation')
 const VectorDBManager = require('../src/VectorDBManager')
 const RAGAgent = require('../src/RagAgent')
 const func = require('../src/embeddings/llama31')
 
 ;(async () => {
 
-    const inferenceModel = new InferenceModel('llama3.1')
 
+    const inferenceModel = new InferenceModel()
+
+    console.log('inference model created')
     const lanceDBBackend = new LanceDBAdapter('/tmp/lancedb/', func)
+    console.log('backend created')
     const vectorDBManager = new VectorDBManager(lanceDBBackend)
+    console.log('manager created')
     const retrievalManager = new RetrievalManager(vectorDBManager)
+    console.log('retrieval manager created')
 
     const ragAgent = new RAGAgent({
         retrievalManager,
         inferenceModel
     })
+    console.log('rag agent created')
 
     const query = 'What was the outcome of the 2024 Wimbledon Championship?';
 
